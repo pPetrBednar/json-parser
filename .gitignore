@@ -1,6 +1,4 @@
+/nbproject/private
 /build
 /dist
-/nbproject
-/temp
-build.xml
-manifest.mf
+/test
