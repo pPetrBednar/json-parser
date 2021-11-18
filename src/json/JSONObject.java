@@ -8,8 +8,11 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
+ * JSONObject implemented as HashMap intended to store JSONDataStructure objects and other Object types.
  *
- * @author Petr Bednář <https://www.facebook.com/petrexis>
+ * Normal arrays not supported (Use JSONArray).
+ *
+ * @author Petr Bednář
  */
 public class JSONObject extends HashMap<String, Object> implements JSONDataStructure {
 
@@ -20,7 +23,7 @@ public class JSONObject extends HashMap<String, Object> implements JSONDataStruc
     }
 
     @Override
-    public String toJSON(int spacing) throws JSONException {
+    public String getJSONString(int spacing) throws JSONException {
         StringBuilder sb = new StringBuilder();
 
         sb.append("{\n");
@@ -55,7 +58,7 @@ public class JSONObject extends HashMap<String, Object> implements JSONDataStruc
                     }
 
                     if (data instanceof JSONDataStructure) {
-                        sb.append(((JSONDataStructure) data).toJSON(spacing, 1, true)).append(",\n");
+                        sb.append(((JSONDataStructure) data).getJSONString(spacing, 1, true)).append(",\n");
                         return;
                     }
 
@@ -88,7 +91,7 @@ public class JSONObject extends HashMap<String, Object> implements JSONDataStruc
     }
 
     @Override
-    public String toJSON(int spacing, int indent, boolean inner) throws JSONException {
+    public String getJSONString(int spacing, int indent, boolean inner) throws JSONException {
         StringBuilder sb = new StringBuilder();
 
         sb.append(inner ? "" : String.format("%" + (indent * spacing) + "s", "")).append("{\n");
@@ -122,7 +125,7 @@ public class JSONObject extends HashMap<String, Object> implements JSONDataStruc
                     }
 
                     if (data instanceof JSONDataStructure) {
-                        sb.append(((JSONDataStructure) data).toJSON(spacing, (indent + 1), true)).append(",\n");
+                        sb.append(((JSONDataStructure) data).getJSONString(spacing, (indent + 1), true)).append(",\n");
                         return;
                     }
                     /*
@@ -154,7 +157,7 @@ public class JSONObject extends HashMap<String, Object> implements JSONDataStruc
     }
 
     @Override
-    public String toJSONMinified() throws JSONException {
+    public String getJSONStringMinified() throws JSONException {
         StringBuilder sb = new StringBuilder();
 
         sb.append("{");
@@ -185,7 +188,7 @@ public class JSONObject extends HashMap<String, Object> implements JSONDataStruc
                     }
 
                     if (o instanceof JSONDataStructure) {
-                        sb.append(((JSONDataStructure) o).toJSONMinified()).append(",");
+                        sb.append(((JSONDataStructure) o).getJSONStringMinified()).append(",");
                         return;
                     }
                     /*

@@ -2,30 +2,44 @@ package json;
 
 /**
  *
- * @author Petr Bednář <https://www.facebook.com/petrexis>
+ * @author Petr Bednář
  */
 public interface JSONDataStructure {
 
     /**
+     * Converts JSONDataStructure to JSON String.
      *
-     *
-     * @param spacing Use 3 for best spacing
-     * @return
-     * @throws JSONException
+     * @param spacing Spacing (3).
+     * @return String in JSON format.
+     * @throws JSONException When conversion fails.
      */
-    public String toJSON(int spacing) throws JSONException;
-
-    public String toJSON(int spacing, int indent, boolean inner) throws JSONException;
-
-    public String toJSONMinified() throws JSONException;
+    public String getJSONString(int spacing) throws JSONException;
 
     /**
-     * JSON Formatter, not 100% difficulties with inner objects and arrays +
-     * {}[] in Strings
+     * Converts JSONDataStructure to JSON String.
      *
-     * @param json_str
-     * @param indent_width
-     * @return
+     * @param spacing Spacing (3).
+     * @param indent Indent.
+     * @param inner Inner.
+     * @return String in JSON format.
+     * @throws JSONException When conversion fails.
+     */
+    public String getJSONString(int spacing, int indent, boolean inner) throws JSONException;
+
+    /**
+     * Converts JSONDataStructure to JSON Minified String.
+     *
+     * @return String in JSON format.
+     * @throws JSONException When conversion fails.
+     */
+    public String getJSONStringMinified() throws JSONException;
+
+    /**
+     * JSON Formatter, not 100% difficulties with inner objects and arrays + {}[] in Strings.
+     *
+     * @param json_str Input String.
+     * @param indent_width Indent
+     * @return Foratted String.
      */
     public static String formatJSON(final String json_str, final int indent_width) {
         final char[] chars = json_str.toCharArray();

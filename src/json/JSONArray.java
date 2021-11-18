@@ -1,15 +1,16 @@
 package json;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
+ * JSONArray implemented as LinkedList for converting stored JSONDataStructure objects to JSON strings.
  *
- * @author Petr Bednář <https://www.facebook.com/petrexis>
+ * @author Petr Bednář
  */
-public class JSONArray extends ArrayList<JSONDataStructure> implements JSONDataStructure {
+public class JSONArray extends LinkedList<JSONDataStructure> implements JSONDataStructure {
 
     @Override
-    public String toJSON(int spacing) throws JSONException {
+    public String getJSONString(int spacing) throws JSONException {
         StringBuilder sb = new StringBuilder();
 
         sb.append("[\n");
@@ -18,7 +19,7 @@ public class JSONArray extends ArrayList<JSONDataStructure> implements JSONDataS
 
                 try {
 
-                    sb.append(o.toJSON(spacing, 1, false));
+                    sb.append(o.getJSONString(spacing, 1, false));
                     sb.append(",\n");
 
                 } catch (JSONException e) {
@@ -29,7 +30,7 @@ public class JSONArray extends ArrayList<JSONDataStructure> implements JSONDataS
             if (size() > 0) {
                 sb.setLength(Math.max(sb.length() - 2, 0));
             }
-            
+
             sb.append("\n");
         } catch (RuntimeException e) {
             throw new JSONException(e.getMessage(), e.getCause());
@@ -40,7 +41,7 @@ public class JSONArray extends ArrayList<JSONDataStructure> implements JSONDataS
     }
 
     @Override
-    public String toJSON(int spacing, int indent, boolean inner) throws JSONException {
+    public String getJSONString(int spacing, int indent, boolean inner) throws JSONException {
 
         StringBuilder sb = new StringBuilder();
 
@@ -50,7 +51,7 @@ public class JSONArray extends ArrayList<JSONDataStructure> implements JSONDataS
 
                 try {
 
-                    sb.append(o.toJSON(spacing, (indent + 1), false));
+                    sb.append(o.getJSONString(spacing, (indent + 1), false));
                     sb.append(",\n");
 
                 } catch (JSONException e) {
@@ -61,7 +62,7 @@ public class JSONArray extends ArrayList<JSONDataStructure> implements JSONDataS
             if (size() > 0) {
                 sb.setLength(Math.max(sb.length() - 2, 0));
             }
-            
+
             sb.append("\n");
         } catch (RuntimeException e) {
             throw new JSONException(e.getMessage(), e.getCause());
@@ -72,7 +73,7 @@ public class JSONArray extends ArrayList<JSONDataStructure> implements JSONDataS
     }
 
     @Override
-    public String toJSONMinified() throws JSONException {
+    public String getJSONStringMinified() throws JSONException {
 
         StringBuilder sb = new StringBuilder();
 
@@ -82,7 +83,7 @@ public class JSONArray extends ArrayList<JSONDataStructure> implements JSONDataS
 
                 try {
 
-                    sb.append(o.toJSONMinified());
+                    sb.append(o.getJSONStringMinified());
                     sb.append(",");
 
                 } catch (JSONException e) {

@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import jdk.nashorn.internal.ir.BreakNode;
 import json.JSONArray;
 import json.JSONDataStructure;
 import json.JSONException;
@@ -13,7 +12,7 @@ import json.JSONObject;
 
 /**
  *
- * @author Petr Bednář <https://www.facebook.com/petrexis>
+ * @author Petr Bednář
  */
 public class JSONParser {
 
@@ -45,7 +44,14 @@ public class JSONParser {
         return result;
     }
 
-    public JSONDataStructure parse(String json) throws JSONParserException, ParseException {
+    /**
+     * Converts JSON string to appropriate JSON Objects.
+     *
+     * @param json Input JSON string.
+     * @return JSONDataStructure.
+     * @throws JSONParserException when parsing fails.
+     */
+    public JSONDataStructure parse(String json) throws JSONParserException {
 
         String[] lines = json.split("\n");
         parser = new RecursiveParser();
@@ -88,17 +94,17 @@ public class JSONParser {
         }
 
         @Override
-        public String toJSON(int spacing) throws JSONException {
+        public String getJSONString(int spacing) throws JSONException {
             return null;
         }
 
         @Override
-        public String toJSON(int spacing, int indent, boolean inner) throws JSONException {
+        public String getJSONString(int spacing, int indent, boolean inner) throws JSONException {
             return null;
         }
 
         @Override
-        public String toJSONMinified() throws JSONException {
+        public String getJSONStringMinified() throws JSONException {
             return null;
         }
 
@@ -117,7 +123,7 @@ public class JSONParser {
         private boolean returnValue = false;
         private boolean passThrough = false;
 
-        JSONDataStructure parse(String line) throws JSONParserException, ParseException {
+        JSONDataStructure parse(String line) throws JSONParserException {
 
             if (passThrough) {
 
@@ -182,7 +188,7 @@ public class JSONParser {
             return null;
         }
 
-        JSONParserCarry parseObject(String line) throws JSONParserException, ParseException {
+        JSONParserCarry parseObject(String line) throws JSONParserException {
 
             if (line.equals("{")) {
                 tempObject = new JSONObject();
