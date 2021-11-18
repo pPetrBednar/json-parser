@@ -10,6 +10,9 @@
 <project name="json" default="default" basedir=".">
     <description>Builds, tests, and runs the project json.</description>
     <import file="nbproject/build-impl.xml"/>
+    <target name="-post-jar" description="Bundle javadoc to jar" depends="javadoc">
+        <jar compress="${jar.compress}" basedir="${dist.javadoc.dir}" jarfile="${dist.dir}/${application.title}-javadoc.jar"/>
+    </target>
     <!--
 
     There exist several targets which are by default empty and which can be 
