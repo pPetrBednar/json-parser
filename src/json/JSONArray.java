@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Petr Bednář
+ * @author Petr Bednář <https://www.facebook.com/petrexis>
  */
 public class JSONArray extends ArrayList<JSONDataStructure> implements JSONDataStructure {
 

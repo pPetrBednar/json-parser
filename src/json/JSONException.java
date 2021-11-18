@@ -2,7 +2,7 @@ package json;
 
 /**
  *
- * @author Petr Bednář
+ * @author Petr Bednář <https://www.facebook.com/petrexis>
  */
 @SuppressWarnings("serial")
 public class JSONException extends Exception {

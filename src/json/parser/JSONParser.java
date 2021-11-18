@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import jdk.nashorn.internal.ir.BreakNode;
 import json.JSONArray;
 import json.JSONDataStructure;
 import json.JSONException;
@@ -12,7 +13,7 @@ import json.JSONObject;
 
 /**
  *
- * @author Petr Bednář
+ * @author Petr Bednář <https://www.facebook.com/petrexis>
  */
 public class JSONParser {
 
@@ -236,8 +237,11 @@ public class JSONParser {
                 }
 
                 if (IS_INTEGER.matcher(noComma).matches()) {
-                    tempObject.put(tempKey, Integer.parseInt(noComma));
-                    return null;
+                    try {
+                        tempObject.put(tempKey, Integer.parseInt(noComma));
+                        return null;
+                    } catch (NumberFormatException ex) {
+                    }
                 }
 
                 if (IS_DOUBLE.matcher(noComma).matches()) {

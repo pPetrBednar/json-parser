@@ -2,7 +2,7 @@ package json.parser;
 
 /**
  *
- * @author Petr Bednář
+ * @author Petr Bednář <https://www.facebook.com/petrexis>
  */
 @SuppressWarnings("serial")
 public class JSONParserException extends Exception {

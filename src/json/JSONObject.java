@@ -1,14 +1,23 @@
 package json;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
  *
- * @author Petr Bednář
+ * @author Petr Bednář <https://www.facebook.com/petrexis>
  */
 public class JSONObject extends HashMap<String, Object> implements JSONDataStructure {
+
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+
+    static {
+        DECIMAL_FORMAT.setMaximumFractionDigits(340);
+    }
 
     @Override
     public String toJSON(int spacing) throws JSONException {
@@ -31,7 +40,7 @@ public class JSONObject extends HashMap<String, Object> implements JSONDataStruc
                     }
 
                     if (data instanceof Number) {
-                        sb.append(data.toString()).append(",\n");
+                        sb.append(DECIMAL_FORMAT.format(data)).append(",\n");
                         return;
                     }
 
@@ -98,7 +107,7 @@ public class JSONObject extends HashMap<String, Object> implements JSONDataStruc
                     }
 
                     if (data instanceof Number) {
-                        sb.append(data.toString()).append(",\n");
+                        sb.append(DECIMAL_FORMAT.format(data)).append(",\n");
                         return;
                     }
 
@@ -161,7 +170,7 @@ public class JSONObject extends HashMap<String, Object> implements JSONDataStruc
                     }
 
                     if (o instanceof Number) {
-                        sb.append(o.toString()).append(",");
+                        sb.append(DECIMAL_FORMAT.format(o)).append(",\n");
                         return;
                     }
 
@@ -188,7 +197,10 @@ public class JSONObject extends HashMap<String, Object> implements JSONDataStruc
                     }
                      */
 
-                    sb.append("\"").append(o.toString()).append("\",");
+                    String text = o.toString();
+                    text = text.replaceAll("\\", "\\\\");
+
+                    sb.append("\"").append(text).append("\",");
 
                 } catch (JSONException e) {
                     throw new RuntimeException(e.getMessage(), e.getCause());
