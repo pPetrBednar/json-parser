@@ -2,7 +2,6 @@ package json.parser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import json.JSONArray;
@@ -23,18 +22,29 @@ public class JSONParser {
     private RecursiveParser parser;
     private JSONDataStructure result;
 
-    public JSONDataStructure parse(BufferedReader br) throws JSONParserException, IOException, ParseException {
+    /**
+     * Converts JSON string from buffered reader to appropriate JSON Objects.
+     *
+     * @param br Buffered reader containing JSON string
+     * @return JSONDataStructure Inputed string converted to JSON data structure
+     * @throws JSONParserException Thrown when parsing fails
+     */
+    public JSONDataStructure parse(BufferedReader br) throws JSONParserException {
 
         String line;
         parser = new RecursiveParser();
 
-        while ((line = br.readLine()) != null) {
-            line = line.trim();
-            result = parser.parse(line);
+        try {
+            while ((line = br.readLine()) != null) {
+                line = line.trim();
+                result = parser.parse(line);
 
-            if (result != null) {
-                return result;
+                if (result != null) {
+                    return result;
+                }
             }
+        } catch (IOException ex) {
+            throw new JSONParserException();
         }
 
         if (result == null) {
@@ -45,11 +55,11 @@ public class JSONParser {
     }
 
     /**
-     * Converts JSON string to appropriate JSON Objects.
+     * Converts JSON string from text to appropriate JSON Objects.
      *
-     * @param json Input JSON string.
-     * @return JSONDataStructure.
-     * @throws JSONParserException when parsing fails.
+     * @param json Input JSON string
+     * @return JSONDataStructure Inputed string converted to JSON data structure
+     * @throws JSONParserException when parsing fails
      */
     public JSONDataStructure parse(String json) throws JSONParserException {
 
