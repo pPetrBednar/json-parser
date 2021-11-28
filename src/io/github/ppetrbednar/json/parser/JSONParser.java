@@ -1,13 +1,13 @@
-package json.parser;
+package io.github.ppetrbednar.json.parser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import json.JSONArray;
-import json.JSONDataStructure;
-import json.JSONException;
-import json.JSONObject;
+import io.github.ppetrbednar.json.JSONArray;
+import io.github.ppetrbednar.json.JSONDataStructure;
+import io.github.ppetrbednar.json.JSONException;
+import io.github.ppetrbednar.json.JSONObject;
 
 /**
  *

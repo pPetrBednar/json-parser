@@ -1,4 +1,4 @@
-package json;
+package io.github.ppetrbednar.json;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;

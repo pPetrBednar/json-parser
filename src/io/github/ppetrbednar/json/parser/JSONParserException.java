@@ -1,4 +1,4 @@
-package json.parser;
+package io.github.ppetrbednar.json.parser;
 
 /**
  *

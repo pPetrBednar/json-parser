@@ -1,4 +1,4 @@
-package json;
+package io.github.ppetrbednar.json;
 
 /**
  * Specifies class as convertable to JSONObject.
